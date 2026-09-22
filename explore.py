@@ -25,3 +25,18 @@ print(df[df["Glucose"] > 150])
 
 # group by a column, get mean of another
 print(df.groupby("Outcome")["Age"].mean())
+
+
+# missing values per column
+print(df.isnull().sum())
+
+# filter: rows where age > 50
+print(df[df["Age"] > 50])
+
+# groupby: mean of bmi by diabetes_risk
+print(df.groupby("Diabetes_risk")["BMI"].mean())
+
+# plot
+import matplotlib.pyplot as plt
+df["Age"].hist()
+plt.show()
