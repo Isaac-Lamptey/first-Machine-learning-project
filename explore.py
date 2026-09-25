@@ -6,6 +6,7 @@
 
 
 # lets now work witth the actual code
+
 # starting with pandas
 import pandas as pd
 #load
@@ -30,11 +31,9 @@ print(df.groupby("diabetes_risk")["bmi"].mean())
 # missing values per column
 print(df.isnull().sum())
 
-# filter: rows where age > 50
+# filter: rows where age > 53
 print(df[df["age"] > 53])
 
-# groupby: mean of bmi by diabetes_risk
-print(df.groupby("diabetes_risk")["bmi"].mean())
 
 # plot
 import matplotlib.pyplot as plt
