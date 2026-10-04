@@ -11,7 +11,7 @@ y = (data['diabetes_risk'] == 'High').astype(int).values
 X = data[['bmi', 'hba1c_level']].values
 
 #Check the shapes of the features and the targets
-print(X.shape, y.shape)
+#print(X.shape, y.shape)
 
 #Check if the target has the binary category in a sane ratio
 #print(y[:10])
@@ -40,7 +40,7 @@ def binary_cross_entropy(y, p):
     eps = 1e-15
     p = np.clip(p, eps, 1 - eps) # A numerical stability guard. Prevents log(0), which is numerically problematic.
     return -np.mean(y * np.log(p) + (1 - y) * np.log(1 - p))
-print(binary_cross_entropy(y, p))
+#print(binary_cross_entropy(y, p))
 
 # STEP 5: The Gradient 
 def compute_gradients(X, y, p):
@@ -57,8 +57,8 @@ dw, db = compute_gradients(X, y, p)
 w, b
 X_mean = X.mean(axis= 0)
 X_std = X.std(axis= 0)
-X_scaled = (X - X_mean) / X_std #Standardizes the features 
-print(X_scaled.mean(axis = 0))
+X_scaled = (X - X_mean) / X_std #Standardizes the features. Feature scaling
+#print(X_scaled.mean(axis = 0))
 
 learning_rate= 0.01
 epochs= 3000
@@ -79,13 +79,33 @@ print('FINAL w:', w)
 print('FINAL b:', b)
 
 
+
+
+#DAY6: Turning probabilities into predictions
+
+# STEP 1: Threshold and predict
+def predict_class(p, threshold=0.5):
+    return (p >= threshold).astype(int)
+p = predict_proba(X_scaled, w, b)
+y_pred = predict_class(p)
+#print(y_pred[:20])
+#print([y[:20]])
+
+
+
+
+# step 2: confusion matrix
+TP = np.sum((y_pred == 1) & (y == 1)) #predicted 'High risk', actually 'High risk'
+TN = np.sum((y_pred == 0) & (y == 0)) #predicted 'not High risk', actually 'not High risk'
+FP = np.sum((y_pred == 1) & (y == 0)) #predicted 'High risk', actually 'not High risk'
+FN = np.sum((y_pred == 0) & (y == 1)) #predicted 'not High risk', actually 'High risk'
+print("TP:", TP, 'TN:', TN, 'FP:', FP, 'FN:', FN)
+
+
 # Plotting the loss curve
 import matplotlib.pyplot as plt
 plt.plot(losses)
 plt.xlabel("Epoch")
 plt.ylabel("Loss")
 plt.title("Training Loss")
-
 plt.show()
-
-
