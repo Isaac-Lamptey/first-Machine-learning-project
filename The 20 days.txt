@@ -1,0 +1,31 @@
+The 20 days
+
+Days 1–3: Hands on the keyboard (Python, NumPy, pandas)
+No ML. Environment set up, Git working. Then drills: load a CSV, inspect dtypes, find missing values, filter rows, group and aggregate, join two frames, plot a distribution. NumPy: arrays, shapes, broadcasting, matrix multiply, vectorised operations instead of loops. Deliverable: a script that takes a raw messy CSV and outputs a cleaned one, written from blank.
+
+Days 4–6: Logistic regression from scratch in NumPy
+No scikit-learn. You write the forward pass, sigmoid, binary cross-entropy, the gradients, the update loop. Then you plot the loss curve. Then you break it deliberately: set the learning rate to 10, then to 0.000001, and explain both curves. This is where your Phase 1 vocabulary becomes knowledge. Deliverable: logreg_from_scratch.py, plus your own explanation of why the loss curve looks the way it does.
+
+Days 7–8: scikit-learn, Decision Tree vs Random Forest
+Now the library. Same problem you just solved by hand, so you can see exactly what .fit() was hiding. Then trees and forests. Sweep max_depth, n_estimators, min_samples_leaf, and record what each does to train vs test score. Deliverable: a comparison table you produced and can defend.
+
+Days 9–11: Evaluation and the probability you're missing
+This is the part your old plan marked green and shouldn't have. Baselines (can you beat predicting the majority class?). Class imbalance. Threshold tuning and the precision/recall tradeoff as you move it. ROC and AUC. Cross-validation and why a single train/test split misled you. Then the probability underneath: distributions, expectation, maximum likelihood, and why cross-entropy is the loss rather than something arbitrary. Deliverable: take a model from Day 8 that looked good and prove it was lying.
+
+Days 12–13: Real, messy data
+Not iris, not titanic. Something with missing values, mixed types, and no clean target column. Feature engineering, encoding, scaling, leakage. Learning what data leakage is by accidentally causing it is a rite of passage. Do it now, not in a client project.
+
+Days 14–17: One end-to-end system
+Pick the problem from your own world: support-ticket intent classification. It's genuinely classical ML, it's useful to Lami Nexus, and it forces you to make the data yourself. Data → model → honest evaluation → FastAPI endpoint → Docker → deployed on your DigitalOcean box. You already know Caddy and DO, so lean on that.
+
+Days 18–19: Write it up
+README explaining the problem, the data, the approach, the metrics, and what you'd do with more time. Then a public post breaking down one thing you learned. Writing it exposes the parts you don't understand. That's the point.
+
+Day 20: Assessment
+I give you problems you haven't seen and you solve them cold. Then we plan the next 60 days based on what actually broke.
+
+What you owe me daily
+
+End of each day, one message: what you built, what broke, and the code or output. I'll push back on the reasoning, not just the syntax. If you go quiet for three days, the plan failed and we diagnose why instead of pretending.
+
+Two things to decide before Day 1: are you working from a laptop you control (so local install is viable), and how many hours a day are you actually putting in, given Lami Nexus clients don't pause for your vacation?
