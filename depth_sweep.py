@@ -22,6 +22,7 @@ for depth in [2, 3, 5, 10,20, None]:
         test_rec = recall_score(y_test, model.predict(X_test))
         print(f'{name:6} depth={str(depth):4} train= {train_acc:.3f} test={test_acc:.3f} gap={train_acc - test_acc:.3f} recall={test_rec: .3f}')
 
+#cross validation
 from sklearn.model_selection import cross_val_score, StratifiedKFold
 
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
@@ -30,4 +31,18 @@ for depth in [2, 3, 5, 10, None]:
     model = RandomForestClassifier(max_depth=depth, random_state=42)
     scores = cross_val_score(model, X_train, y_train, cv=cv, scoring="f1")
     print(f"depth={str(depth):4} f1 mean={scores.mean():.3f} std={scores.std():.3f}")
-    
+
+
+    #choosing threshold
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+model = RandomForestClassifier(max_depth=5, random_state=42)
+proba = cross_val_predict(model, X_train, y_train, cv=cv, method="predict_proba")[:, 1]
+
+for t in [0.2, 0.3, 0.4, 0.5, 0.6]:
+    pred = (proba >= t).astype(int)
+    print(f"t={t} precision={precision_score(y_train, pred):.3f} "
+          f"recall={recall_score(y_train, pred):.3f} f1={f1_score(y_train, pred):.3f}")
+
+ 
