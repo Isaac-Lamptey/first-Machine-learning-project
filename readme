@@ -10,7 +10,7 @@ A self-directed learning project. I built logistic regression from scratch in Nu
 
 Predict whether a patient is **High risk** for diabetes (1) or not (0), from health and lifestyle columns.
 
-- **Data:** `diabetes_risk.csv`, 15,000 rows, 19 columns. Source: [ADD SOURCE AND LICENSE HERE]
+- **Data:** `diabetes_risk.csv`, 15,000 rows, 19 columns. Source: [Kaggle datasets]
 - **Class balance:** about 15% High risk, 85% not. This imbalance shapes everything below.
 - **Target:** `diabetes_risk == "High"`
 
