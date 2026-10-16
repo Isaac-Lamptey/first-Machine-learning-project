@@ -8,7 +8,8 @@ from sklearn.metrics import accuracy_score, recall_score
 #load data
 data = pd.read_csv('diabetes_risk.csv')
 y = (data['diabetes_risk'] == 'High'). astype(int).values
-X = data[['bmi', 'hba1c_level', 'age', 'fasting_blood_sugar', 'waist_circumference_cm']].values
+#X = data[['bmi', 'hba1c_level', 'age', 'fasting_blood_sugar', 'waist_circumference_cm']].values
+X = data[['bmi', 'age', 'waist_circumference_cm']].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 for depth in [2, 3, 5, 10,20, None]:
     models = [
@@ -33,7 +34,7 @@ for depth in [2, 3, 5, 10, None]:
     print(f"depth={str(depth):4} f1 mean={scores.mean():.3f} std={scores.std():.3f}")
 
 
-    #choosing threshold
+    #choosing threshold using cross-validation
 from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import precision_score, recall_score, f1_score
 
@@ -45,4 +46,15 @@ for t in [0.2, 0.3, 0.4, 0.5, 0.6]:
     print(f"t={t} precision={precision_score(y_train, pred):.3f} "
           f"recall={recall_score(y_train, pred):.3f} f1={f1_score(y_train, pred):.3f}")
 
- 
+# using test datat
+print('the test set')
+from sklearn.metrics import confusion_matrix, precision_score, recall_score
+
+final = RandomForestClassifier(max_depth=5, random_state=42)
+final.fit(X_train, y_train)
+proba_test = final.predict_proba(X_test)[:, 1]
+
+for t in [0.2, 0.5]:
+    pred = (proba_test >= t).astype(int)
+    print(f"t={t} precision={precision_score(y_test, pred):.3f} recall={recall_score(y_test, pred):.3f}")
+    print(confusion_matrix(y_test, pred))
