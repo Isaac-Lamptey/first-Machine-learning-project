@@ -65,6 +65,30 @@ python logreg_scratch.py
 python depth_sweep.py
 ```
 
-## Next
+## Deploy
 
-Wrap the saved model in a FastAPI endpoint and deploy it.
+## Use the API
+
+```bash
+pip install fastapi uvicorn scikit-learn pandas joblib
+uvicorn api:app --reload
+```
+
+Open http://127.0.0.1:8000/docs, choose `POST /predict`, and press "Try it out".
+
+Example request body:
+
+```json
+{"bmi": 29.0, "hba1c_level": 7.5, "age": 52, "fasting_blood_sugar": 130, "waist_circumference_cm": 102}
+```
+
+Example response:
+
+```json
+{"probability": 0.203, "flagged": true, "threshold": 0.2}
+```
+
+Inputs outside the training range are rejected with a 422 error, because the model can't extrapolate beyond data it has seen. Accepted ranges: BMI 15 to 40.8, HbA1c 4.8 to 13.4, age 18 to 80, waist 73.2 to 148.2 cm, fasting blood sugar [MIN] to [MAX].
+
+The threshold is set to 0.2 to favour catching high-risk patients over avoiding false alarms. See the results table above. This is a learning project, not a clinical tool.
+
