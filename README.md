@@ -89,7 +89,7 @@ Example response:
 {"probability": 0.203, "flagged": true, "threshold": 0.2}
 ```
 
-Inputs outside the training range are rejected with a 422 error, because the model can't extrapolate beyond data it has seen. Accepted ranges: BMI 15 to 40.8, HbA1c 4.8 to 13.4, age 18 to 80, waist 73.2 to 148.2 cm, fasting blood sugar 74 to 140.
+Inputs outside the training range are rejected with a 422 error, because the model can't extrapolate beyond data it has seen. Accepted ranges: BMI 15 to 40.8, HbA1c 4.8 to 13.4, age 18 to 80, waist 73.2 to 148.2 cm, fasting blood sugar 71 to 400.0 mg/dL.
 
 The threshold is set to 0.2 to favour catching high-risk patients over avoiding false alarms. See the results table above. This is a learning project, not a clinical tool.
 
