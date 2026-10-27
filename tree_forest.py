@@ -20,7 +20,7 @@ def evaluate(name, model):
     print(f'...{name}....')
     print('Accuracy:', accuracy_score(y_test, y_pred))
     print('precision:', precision_score(y_test, y_pred))
-    print('Recal:', recall_score(y_test, y_pred))
+    print('Recall:', recall_score(y_test, y_pred))
     print('F1:', f1_score(y_test, y_pred))
 
 # call the function

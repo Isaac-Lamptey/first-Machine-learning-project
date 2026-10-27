@@ -10,12 +10,12 @@ data = pd.read_csv('diabetes_risk.csv')
 
 # set features and labels from dataset
 y = (data['diabetes_risk'] == 'High').astype(int).values # labels/target
-X = (data[['bmi', 'hba1c_level']]).values # Using two featues
+X = (data[['bmi', 'hba1c_level']]).values # Using two features
 
 # X_train/test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# set the model
+# train the model
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
@@ -25,7 +25,7 @@ y_pred = model.predict(X_test)
 # Evaluation metrics
 print("Accuracy:",  accuracy_score(y_test, y_pred))
 print('Precision:', precision_score(y_test, y_pred))
-print('Recal:', recall_score(y_test, y_pred))
+print('Recall:', recall_score(y_test, y_pred))
 print('F1:', f1_score(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
 
