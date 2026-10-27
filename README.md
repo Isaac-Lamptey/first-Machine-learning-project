@@ -60,7 +60,8 @@ Predict whether a patient is **High risk** for diabetes (1) or not (0), from hea
 ```bash
 python -m venv venv
 venv\Scripts\activate        # Windows
-pip install pandas numpy matplotlib scikit-learn joblib openpyxl
+venv/bin/activate  # Linux/macOS
+pip install -r requirements.txt
 python logreg_scratch.py
 python depth_sweep.py
 ```
