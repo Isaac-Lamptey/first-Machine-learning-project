@@ -54,7 +54,6 @@ dw, db = compute_gradients(X, y, p)
 #print(db)
 
 # STEP 6: PARAMETER RESET AND THE TRAINING LOOP
-w, b
 X_mean = X.mean(axis= 0)
 X_std = X.std(axis= 0)
 X_scaled = (X - X_mean) / X_std #Standardizes the features. Feature scaling
@@ -73,7 +72,7 @@ for i in range(epochs):
     w = w - learning_rate * dw
     b = b - learning_rate * db
     if i % 100 == 0:
-        print(f"epoch {i}, loss = {loss: 4f}")
+        print(f"epoch {i}, loss = {loss:.4f}")
 print("FINAL LOSS:", losses[-1])
 print('FINAL w:', w)
 print('FINAL b:', b)

@@ -4,13 +4,13 @@ A self-directed learning project. I built logistic regression from scratch in Nu
 
 > **This is a learning project, not a clinical tool.** Do not use it to make medical decisions.
 
-**Author:** Isaac Lamptey, Computer Science & Engineering student, UMAT (Ghana)
+**Author:** Isaac Lamptey, Computer Science & Engineering student, UMaT (Ghana)
 
 ## The problem
 
 Predict whether a patient is **High risk** for diabetes (1) or not (0), from health and lifestyle columns.
 
-- **Data:** `diabetes_risk.csv`, 15,000 rows, 19 columns. Source: [Kaggle datasets]
+- **Data:** `diabetes_risk.csv`, 15,000 rows, 19 columns. 
 - **Class balance:** about 15% High risk, 85% not. This imbalance shapes everything below.
 - **Target:** `diabetes_risk == "High"`
 
@@ -25,6 +25,8 @@ Predict whether a patient is **High risk** for diabetes (1) or not (0), from hea
 | `depth_sweep.py` | Overfitting by `max_depth`, 5-fold cross-validation, threshold tuning, final test-set check |
 | `categoricals.py` | Adds the text columns using one-hot encoding |
 | `cv_and_threshold_tables.xlsx` | CV and threshold tables with a cost scenario you can edit |
+| `train_final.py` | Trains the final Random Forest model and saves `risk_model.pkl` with threshold metadata |
+| `api.py` | FastAPI service providing a `/predict` endpoint with input validation |
 
 ## Results
 
@@ -53,6 +55,7 @@ Predict whether a patient is **High risk** for diabetes (1) or not (0), from hea
 - One train/test split with about 430 positive test cases, so recall is only good to about ±0.03.
 - The from-scratch model was evaluated on its own training data.
 - The dataset's origin and label definition are not verified.
+- Holdout splits aren’t stratified; CV folds are.”
 
 
 ## Run it
@@ -60,7 +63,7 @@ Predict whether a patient is **High risk** for diabetes (1) or not (0), from hea
 ```bash
 python -m venv venv
 venv\Scripts\activate        # Windows
-venv/bin/activate  # Linux/macOS
+source venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 python logreg_scratch.py
 python depth_sweep.py
@@ -68,10 +71,8 @@ python depth_sweep.py
 
 ## Deploy
 
-## Use the API
-
 ```bash
-pip install fastapi uvicorn scikit-learn pandas joblib
+
 uvicorn api:app --reload
 ```
 
